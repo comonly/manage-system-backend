@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.comonly.dao.StockIndividualMapper">
+  <resultMap id="BaseResultMap" type="cn.comonly.pojo.StockIndividual">
+    <id column="Iid" jdbcType="INTEGER" property="iid" />
+    <result column="Icode" jdbcType="VARCHAR" property="icode" />
+    <result column="Iname" jdbcType="VARCHAR" property="iname" />
+    <result column="Iindustry" jdbcType="INTEGER" property="iindustry" />
+    <result column="Iconcept" jdbcType="VARCHAR" property="iconcept" />
+    <result column="Idescribe" jdbcType="VARCHAR" property="idescribe" />
+    <result column="Itime" jdbcType="TIMESTAMP" property="itime" />
+    <result column="Ifollow" jdbcType="INTEGER" property="ifollow" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Iid, Icode, Iname, Iindustry, Iconcept, Idescribe, Itime, Ifollow
+  </sql>
+  
+    
+  <select id="getList" resultMap="BaseResultMap">
+    SELECT * FROM stock_individual
+  </select>
+  
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from stock_individual
+    where Iid = #{iid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from stock_individual
+    where Iid = #{iid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.comonly.pojo.StockIndividual">
+    insert into stock_individual (Iid, Icode, Iname, 
+      Iindustry, Iconcept, Idescribe, 
+      Itime, Ifollow)
+    values (#{iid,jdbcType=INTEGER}, #{icode,jdbcType=VARCHAR}, #{iname,jdbcType=VARCHAR}, 
+      #{iindustry,jdbcType=INTEGER}, #{iconcept,jdbcType=VARCHAR}, #{idescribe,jdbcType=VARCHAR}, 
+      #{itime,jdbcType=TIMESTAMP}, #{ifollow,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.comonly.pojo.StockIndividual">
+    insert into stock_individual
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="iid != null">
+        Iid,
+      </if>
+      <if test="icode != null">
+        Icode,
+      </if>
+      <if test="iname != null">
+        Iname,
+      </if>
+      <if test="iindustry != null">
+        Iindustry,
+      </if>
+      <if test="iconcept != null">
+        Iconcept,
+      </if>
+      <if test="idescribe != null">
+        Idescribe,
+      </if>
+      <if test="itime != null">
+        Itime,
+      </if>
+      <if test="ifollow != null">
+        Ifollow,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="iid != null">
+        #{iid,jdbcType=INTEGER},
+      </if>
+      <if test="icode != null">
+        #{icode,jdbcType=VARCHAR},
+      </if>
+      <if test="iname != null">
+        #{iname,jdbcType=VARCHAR},
+      </if>
+      <if test="iindustry != null">
+        #{iindustry,jdbcType=INTEGER},
+      </if>
+      <if test="iconcept != null">
+        #{iconcept,jdbcType=VARCHAR},
+      </if>
+      <if test="idescribe != null">
+        #{idescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="itime != null">
+        #{itime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ifollow != null">
+        #{ifollow,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.comonly.pojo.StockIndividual">
+    update stock_individual
+    <set>
+      <if test="icode != null">
+        Icode = #{icode,jdbcType=VARCHAR},
+      </if>
+      <if test="iname != null">
+        Iname = #{iname,jdbcType=VARCHAR},
+      </if>
+      <if test="iindustry != null">
+        Iindustry = #{iindustry,jdbcType=INTEGER},
+      </if>
+      <if test="iconcept != null">
+        Iconcept = #{iconcept,jdbcType=VARCHAR},
+      </if>
+      <if test="idescribe != null">
+        Idescribe = #{idescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="itime != null">
+        Itime = #{itime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ifollow != null">
+        Ifollow = #{ifollow,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Iid = #{iid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.comonly.pojo.StockIndividual">
+    update stock_individual
+    set Icode = #{icode,jdbcType=VARCHAR},
+      Iname = #{iname,jdbcType=VARCHAR},
+      Iindustry = #{iindustry,jdbcType=INTEGER},
+      Iconcept = #{iconcept,jdbcType=VARCHAR},
+      Idescribe = #{idescribe,jdbcType=VARCHAR},
+      Itime = #{itime,jdbcType=TIMESTAMP},
+      Ifollow = #{ifollow,jdbcType=INTEGER}
+    where Iid = #{iid,jdbcType=INTEGER}
+  </update>
+</mapper>

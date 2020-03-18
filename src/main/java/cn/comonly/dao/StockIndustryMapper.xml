@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.comonly.dao.StockIndustryMapper">
+  <resultMap id="BaseResultMap" type="cn.comonly.pojo.StockIndustry">
+    <id column="Iid" jdbcType="INTEGER" property="iid" />
+    <result column="Iname" jdbcType="VARCHAR" property="iname" />
+    <result column="Idescribe" jdbcType="VARCHAR" property="idescribe" />
+    <result column="Ifollow" jdbcType="INTEGER" property="ifollow" />
+    <result column="Itime" jdbcType="TIMESTAMP" property="itime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Iid, Iname, Idescribe, Ifollow, Itime
+  </sql>
+  
+  <select id="getList" resultMap="BaseResultMap">
+    SELECT * FROM stock_industry
+  </select>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from stock_industry
+    where Iid = #{iid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from stock_industry
+    where Iid = #{iid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.comonly.pojo.StockIndustry">
+    insert into stock_industry (Iid, Iname, Idescribe, 
+      Ifollow, Itime)
+    values (#{iid,jdbcType=INTEGER}, #{iname,jdbcType=VARCHAR}, #{idescribe,jdbcType=VARCHAR}, 
+      #{ifollow,jdbcType=INTEGER}, #{itime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.comonly.pojo.StockIndustry">
+    insert into stock_industry
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="iid != null">
+        Iid,
+      </if>
+      <if test="iname != null">
+        Iname,
+      </if>
+      <if test="idescribe != null">
+        Idescribe,
+      </if>
+      <if test="ifollow != null">
+        Ifollow,
+      </if>
+      <if test="itime != null">
+        Itime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="iid != null">
+        #{iid,jdbcType=INTEGER},
+      </if>
+      <if test="iname != null">
+        #{iname,jdbcType=VARCHAR},
+      </if>
+      <if test="idescribe != null">
+        #{idescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="ifollow != null">
+        #{ifollow,jdbcType=INTEGER},
+      </if>
+      <if test="itime != null">
+        #{itime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.comonly.pojo.StockIndustry">
+    update stock_industry
+    <set>
+      <if test="iname != null">
+        Iname = #{iname,jdbcType=VARCHAR},
+      </if>
+      <if test="idescribe != null">
+        Idescribe = #{idescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="ifollow != null">
+        Ifollow = #{ifollow,jdbcType=INTEGER},
+      </if>
+      <if test="itime != null">
+        Itime = #{itime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Iid = #{iid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.comonly.pojo.StockIndustry">
+    update stock_industry
+    set Iname = #{iname,jdbcType=VARCHAR},
+      Idescribe = #{idescribe,jdbcType=VARCHAR},
+      Ifollow = #{ifollow,jdbcType=INTEGER},
+      Itime = #{itime,jdbcType=TIMESTAMP}
+    where Iid = #{iid,jdbcType=INTEGER}
+  </update>
+</mapper>
